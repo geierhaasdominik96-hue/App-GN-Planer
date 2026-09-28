@@ -1,0 +1,17 @@
+node_modules/
+dist/
+.env
+.env.local
+.env.server
+.env.*
+!.env.server.example
+!**/.env.example
+*.log
+*.tsbuildinfo
+.DS_Store
+coverage/
+.vite/
+data/Sicherungen/
+Benutzerdaten.docx
+Demo-Zugangsdaten.csv
+now()-interval

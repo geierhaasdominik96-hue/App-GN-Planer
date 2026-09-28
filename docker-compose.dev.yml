@@ -1,0 +1,5 @@
+services:
+  postgres:
+    # Nur fuer die lokale Entwicklung ausserhalb des App-Containers.
+    ports:
+      - "127.0.0.1:5432:5432"

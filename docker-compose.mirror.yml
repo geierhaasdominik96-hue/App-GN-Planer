@@ -1,0 +1,8 @@
+services:
+  app:
+    environment:
+      BACKUP_MIRROR_DIRECTORY: /app/data/Sicherungen-Spiegel
+    volumes:
+      - type: bind
+        source: ${BACKUP_MIRROR_HOST_DIRECTORY:?Pfad zum optionalen Sicherungsspiegel fehlt}
+        target: /app/data/Sicherungen-Spiegel

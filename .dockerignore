@@ -1,0 +1,14 @@
+node_modules
+**/node_modules
+**/dist
+**/*.tsbuildinfo
+**/.env
+**/.env.*
+!**/.env.example
+data/Sicherungen
+.git
+.gitignore
+*.log
+Benutzerdaten.docx
+Demo-Zugangsdaten.csv
+now()-interval

@@ -1,0 +1,35 @@
+{
+  "name": "@gn-planer/api",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/server.js",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "db:auth": "auth migrate --config src/auth.ts --yes",
+    "db:app": "tsx src/scripts/migrate-app.ts",
+    "bootstrap:teacher": "tsx src/scripts/bootstrap-teacher.ts"
+  },
+  "dependencies": {
+    "@gn-planer/contracts": "workspace:*",
+    "better-auth": "^1.7.2",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.7.0",
+    "helmet": "^8.3.0",
+    "pg": "^8.23.0",
+    "zod": "^4.5.4"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/pg": "^8.23.1",
+    "@types/supertest": "^7.2.1",
+    "auth": "^1.7.2",
+    "supertest": "^7.2.2"
+  }
+}

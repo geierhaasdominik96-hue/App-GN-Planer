@@ -1,0 +1,31 @@
+{
+  "name": "gn-planer",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@11.19.0",
+  "description": "Schulinterner Planer für Gelingensnachweise",
+  "scripts": {
+    "predev": "pnpm --filter @gn-planer/contracts build",
+    "dev": "concurrently --kill-others-on-fail --names contracts,api,web \"pnpm --filter @gn-planer/contracts dev\" \"pnpm --filter @gn-planer/api dev\" \"pnpm --filter @gn-planer/web dev\"",
+    "start:production": "pnpm --filter @gn-planer/api start",
+    "build": "pnpm -r build",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm -r --if-present test",
+    "db:auth": "pnpm --filter @gn-planer/api db:auth",
+    "db:app": "pnpm --filter @gn-planer/api db:app",
+    "db:setup": "pnpm db:auth && pnpm db:app",
+    "bootstrap:teacher": "pnpm --filter @gn-planer/api bootstrap:teacher",
+    "launcher:build-id": "node scripts/current-build-id.mjs",
+    "launcher:check": "node scripts/check-running-app.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "devDependencies": {
+    "@types/node": "^26.4.1",
+    "concurrently": "^10.0.5",
+    "tsx": "^4.23.13",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.11"
+  }
+}
