@@ -166,6 +166,14 @@ if (-not $dockerPath) {
   Stop-WithMessage "Docker Desktop wurde nicht gefunden. Bitte Docker Desktop installieren."
 }
 
+# Bei einer Docker-Desktop-Benutzerinstallation muss der Installationsordner
+# in HKCU stehen, bevor das Backend zum ersten Mal gestartet wird. Fehlt genau
+# dieser Eintrag, zeigt Docker sonst nur "cannot find registry key" an.
+if ($dockerRoot) {
+  & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $PSScriptRoot "repair-docker-startup.ps1") -DockerRoot $dockerRoot -RegistryOnly
+  if ($LASTEXITCODE -ne 0) { Stop-WithMessage "Der Docker-Installationspfad konnte nicht geprueft werden." }
+}
+
 $dockerStatus = Invoke-NativeProbe $dockerPath @("version")
 if ($dockerStatus -ne 0) {
   $ready = $false

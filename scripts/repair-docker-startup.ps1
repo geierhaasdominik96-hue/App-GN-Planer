@@ -1,7 +1,8 @@
 [CmdletBinding()]
 param(
   [Parameter(Mandatory = $true)]
-  [string]$DockerRoot
+  [string]$DockerRoot,
+  [switch]$RegistryOnly
 )
 
 $ErrorActionPreference = "Stop"
@@ -23,6 +24,13 @@ if ($dockerRootPath.Equals($perUserDockerRoot, [StringComparison]::OrdinalIgnore
     New-Item -Path $registryPath -Force | Out-Null
     New-ItemProperty -Path $registryPath -Name "InstallLocation" -Value $dockerRootPath -PropertyType String -Force | Out-Null
   }
+}
+
+# Der normale Kaltstart benoetigt nur den korrekten Installationspfad. Alte
+# Laufzeit-Sockets werden erst nach einem tatsaechlich fehlgeschlagenen
+# Docker-Start durch den zweiten, gezielten Reparaturversuch behandelt.
+if ($RegistryOnly) {
+  exit 0
 }
 
 # Laufzeitdateien dürfen nur angefasst werden, wenn wirklich kein Docker-Prozess
